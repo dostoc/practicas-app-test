@@ -1,21 +1,32 @@
 import { useEffect, useState } from 'react';
 
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact';
-const CAT_ENDPOINT_RANDOM_IMG = `https://cataas.com/cat/says/${firstWord}`;
+const CAT_ENDPOINT_RANDOM_IMG = `https://cataas.com/cat/says/${firstWord}?size=50&color=red`;
 
 export function App() {
-  const [fact, setFact] = useState('lorem ipsum cat fact');
+  const [fact, setFact] = useState('datos fetcheados de gatos');
 
   useEffect(() => {
-    fetch('CAT_ENDPOINT_RANDOM_FACT')
-      .then((response) => response.json())
-      .then((data) => setFact(data.fact));
+    fetch('https://catfact.ninja/fact')
+      .then((resp) => resp.json())
+      .then((data) => {
+        const { fact } = data;
+
+        setFact(fact);
+
+        const firstWord = fact.split(' ', 3);
+        console.log(firstWord);
+
+        fetch(`https://cataas.com/cat/says/${firstWord}?size=50&color=red`)
+          .then((resp) => resp.json())
+          .then();
+      });
   }, []);
 
   return (
     <div>
       <h1>App de gatos</h1>
-      <p>{fact}</p>
+      {fact && <p>{fact}</p>}
     </div>
   );
 }
