@@ -3,20 +3,19 @@ import { useEffect, useState } from 'react';
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact';
 const CAT_ENDPOINT_RANDOM_IMG = `https://cataas.com/cat/says/${firstWord}`;
 
-export default function app() {
-  const [data, setData] = useState('lorem ipsum cat fact');
+export function App() {
+  const [fact, setFact] = useState('lorem ipsum cat fact');
 
-  // traer datos de la API
   useEffect(() => {
-    fetch(CAT_ENDPOINT_RANDOM_FACT)
-      .then((res) => res.json())
-      .then((data) => setData(res.data));
+    fetch('CAT_ENDPOINT_RANDOM_FACT')
+      .then((response) => response.json())
+      .then((data) => setFact(data.fact));
   }, []);
 
   return (
     <div>
       <h1>App de gatos</h1>
-      <h1>{data}</h1>
+      <p>{fact}</p>
     </div>
   );
 }
