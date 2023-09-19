@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 const CAT_ENDPOINT_RANDOM_FACT = 'https://catfact.ninja/fact';
 const CAT_ENDPOINT_RANDOM_IMG = `https://cataas.com/cat/says/${firstWord}`;
 
-export function App() {
+export default function App() {
   const [fact, setFact] = useState('lorem ipsum cat fact');
 
   useEffect(() => {
